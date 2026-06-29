@@ -1,0 +1,30 @@
+# Virtual environments
+venv/
+test_env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Vector databases
+vectorstore/
+
+# Model cache
+.cache/
+.huggingface/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
