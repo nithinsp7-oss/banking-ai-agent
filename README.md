@@ -15,7 +15,7 @@ An AI-powered mortgage banking assistant built using **Retrieval Augmented Gener
 
 The system provides policy-grounded responses for mortgage queries, performs loan eligibility assessment, and calculates EMI using custom AI tools.
 
----
+--- 
 
 # 📌 Project Overview
 
