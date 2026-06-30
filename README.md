@@ -1,60 +1,204 @@
-# Banking AI Agent - Home Loan Assistant
+Replace your entire `README.md` with the below content.
 
-An AI-powered mortgage banking assistant built using Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), LangGraph agents, and FastAPI.
+This version is written specifically for your **Banking AI Agent project**, optimized for GitHub recruiters and AI Engineer interviews.
 
-The system helps customers evaluate home loan eligibility based on lending policies and calculate estimated EMI using AI-powered tool calling.
+```markdown
+# 🏦 Banking AI Agent - Mortgage Assistant
 
----
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![LangGraph](https://img.shields.io/badge/LangGraph-Agent-orange)
+![RAG](https://img.shields.io/badge/RAG-Enabled-purple)
+![LLM](https://img.shields.io/badge/LLM-Mistral-yellow)
 
-# Project Overview
+An AI-powered mortgage banking assistant built using **Retrieval Augmented Generation (RAG), LangGraph agents, FastAPI, and LLM tool calling**.
 
-Traditional banking assistants rely on predefined rules and limited responses.
-
-This project demonstrates a modern AI banking assistant capable of:
-
-- Understanding natural language customer queries
-- Retrieving relevant lending policy information using RAG
-- Performing eligibility assessment
-- Calculating EMI dynamically
-- Using LLM agent reasoning with external tools
-
+The system provides policy-grounded responses for mortgage queries, performs loan eligibility assessment, and calculates EMI using custom AI tools.
 
 ---
 
-# Architecture
+# 📌 Project Overview
 
-The system follows an agent-based AI architecture:
+Traditional banking support systems require manual policy searching and rule checking.
 
+This project demonstrates an AI agent capable of:
+
+- Understanding customer mortgage queries
+- Retrieving relevant banking policies using RAG
+- Reasoning through LangGraph workflows
+- Calling specialized tools
+- Providing structured banking responses
+
+The assistant acts as a mortgage banking support agent.
+
+---
+
+# 🚀 Key Features
+
+## 🤖 AI Agent Workflow
+
+Implemented using **LangGraph** with:
+
+- State-based agent architecture
+- Tool execution workflow
+- Memory persistence
+- Multi-step reasoning
+
+---
+
+## 🔎 Retrieval Augmented Generation (RAG)
+
+The system uses RAG to ground responses using mortgage policy documents.
+
+Pipeline:
+
+```
+
+Policy Documents
+|
+↓
+Document Loading
+|
+↓
+Text Chunking
+|
+↓
+Embeddings Generation
+|
+↓
+FAISS Vector Database
+|
+↓
+Similarity Retrieval
+|
+↓
+LLM Context
+|
+↓
+Final Response
+
+```
+
+Benefits:
+
+- Reduces hallucination
+- Provides policy-based answers
+- Allows easy document updates
+
+---
+
+# 🧠 Agent Tools
+
+## 1. Loan Eligibility Tool
+
+Evaluates mortgage eligibility using:
+
+```
+
+Maturity Age = Customer Age + Requested Loan Tenure
+
+```
+
+Example:
+
+```
+
+Customer Age: 60
+Loan Tenure: 20 years
+
+Maturity Age:
+60 + 20 = 80 years
+
+Maximum Allowed:
+75 years
+
+Decision:
+Not Eligible
+
+```
+
+---
+
+## 2. EMI Calculator Tool
+
+Calculates monthly EMI using:
+
+- Loan amount
+- Interest rate
+- Loan tenure
+
+Example:
+
+```
+
+Loan Amount: 500000
+Interest Rate: 6%
+Tenure: 20 years
+
+Monthly EMI:
+3582.16
+
+```
+
+---
+
+# 🏗️ System Architecture
 
 ![Architecture](assets/architecture.png)
 
 
+Architecture flow:
+
+```
+
+User Query
+|
+↓
+FastAPI Backend
+|
+↓
+LangGraph Agent
+|
+├── RAG Retriever
+|
+├── Eligibility Tool
+|
+└── EMI Calculator Tool
+|
+↓
+Mistral LLM
+|
+↓
+Structured Response
+
+```
+
 ---
 
-# Technology Stack
-
-## Artificial Intelligence
-
-- Large Language Model: Mistral (Ollama)
-- LangChain
-- LangGraph
-- Retrieval-Augmented Generation (RAG)
-- Vector Embeddings
-- FAISS Vector Database
-
+# 🛠️ Technology Stack
 
 ## Backend
 
 - Python
 - FastAPI
-- Pydantic
+- Uvicorn
 
+## AI Frameworks
+
+- LangChain
+- LangGraph
+- Ollama
+- Mistral LLM
+
+## Retrieval
+
+- FAISS Vector Database
+- Sentence Transformers
+- Embeddings
 
 ## Storage
 
-- FAISS Vector Store
-- SQLite Memory Checkpoint
-
+- SQLite checkpoint memory
 
 ## Development
 
@@ -62,241 +206,320 @@ The system follows an agent-based AI architecture:
 - GitHub
 - Virtual Environment
 
-
 ---
 
-# AI Workflow
-
-Customer Query
-
-↓
-
-LangGraph Agent
-
-↓
-
-Intent Understanding
-
-↓
-
-Tool Selection
-
-↓
-
-RAG Policy Retrieval
-
-↓
-
-Decision Generation
-
-↓
-
-Final Response
-
-
----
-
-# Features
-
-## 1. Home Loan Eligibility Assessment
-
-Example:
-
-Customer:
-
-"I am 55 years old. Can I get a 15 year home loan?"
-
-System calculates:
-
-Customer Age + Loan Tenure = Maturity Age
-
-55 + 15 = 70 years
-
-
-Maximum allowed maturity age:
-
-75 years
-
-
-Result:
-
-Eligible
-
-
----
-
-## 2. EMI Calculation
-
-Example:
-
-Loan Amount:
-500000
-
-Interest Rate:
-6%
-
-Tenure:
-15 years
-
-
-Generated EMI:
-
-4219.28/month
-
-
----
-
-## 3. Combined AI Agent Capability
-
-The agent can perform multiple tasks:
-
-- Check eligibility
-- Calculate EMI
-- Provide policy references
-- Generate structured banking responses
-
-
----
-
-# Project Structure
+# 📂 Project Structure
 
 ```
 
 banking-ai-agent
-
+│
 ├── app
-│
-├── agents
-│   └── rag_agent.py
-│
-├── api
-│   ├── main.py
-│   └── routes.py
-│
-├── rag
-│   ├── loader.py
-│   ├── retriever.py
-│   └── vector_store.py
-│
-├── tools
-│   ├── eligibility_tool.py
-│   └── emi_tool.py
-│
-├── documents
-│   └── home_loan_policy.md
-│
-├── tests
+│   │
+│   ├── agents
+│   │   ├── basic_agent.py
+│   │   └── rag_agent.py
+│   │
+│   ├── api
+│   │   ├── main.py
+│   │   └── routes.py
+│   │
+│   ├── database
+│   │   └── memory.py
+│   │
+│   ├── rag
+│   │   ├── loader.py
+│   │   ├── retriever.py
+│   │   └── vector_store.py
+│   │
+│   └── tools
+│       ├── eligibility_tool.py
+│       └── emi_tool.py
 │
 ├── assets
 │   ├── architecture.png
 │   └── swagger_response.png
 │
+├── documents
+│   └── home_loan_policy.md
+│
+├── docs
+│   └── interview_notes.md
+│
+├── tests
+│
+├── main.py
 ├── requirements.txt
-└── main.py
+└── .env.example
 
 ````
 
-
 ---
 
-# API Demo
+# ⚙️ Installation
 
-FastAPI Swagger Interface:
-
-![Swagger Response](assets/swagger_response.png)
-
-
-Example Request:
-
-```json
-{
- "question":
- "I am 55 years old. Can I get a 15 year home loan? Loan amount 500000 interest rate 6%"
-}
-````
-
-Example Response:
-
-```json
-{
- "decision": "Eligible",
- "reason": "Customer maturity age is 70 years which is within the allowed limit",
- "policy_reference": [
-   "Customer Age Eligibility",
-   "Maximum Loan Tenure"
- ],
- "emi":4219.28
-}
-```
-
----
-
-# Installation
-
-Clone repository:
+## 1. Clone Repository
 
 ```bash
 git clone https://github.com/nithinsp7-oss/banking-ai-agent.git
-```
 
-Create environment:
+cd banking-ai-agent
+````
 
-```bash
-python -m venv venv
-```
+---
 
-Activate:
+## 2. Create Virtual Environment
 
 Windows:
 
 ```bash
+python -m venv venv
+
 venv\Scripts\activate
 ```
 
-Install dependencies:
+Linux/Mac:
+
+```bash
+python3 -m venv venv
+
+source venv/bin/activate
+```
+
+---
+
+## 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run application:
+---
+
+# 🤖 Running Local LLM
+
+This project uses Ollama with Mistral.
+
+Install Ollama:
+
+[https://ollama.com/](https://ollama.com/)
+
+Download model:
 
 ```bash
-python main.py
+ollama pull mistral
+```
+
+Verify:
+
+```bash
+ollama list
 ```
 
 ---
 
-# Running Tests
+# 🔐 Environment Configuration
+
+Create:
+
+```
+.env
+```
+
+Example:
+
+```
+MODEL_NAME=mistral
+VECTOR_DB_PATH=vectorstore
+```
+
+A template is available:
+
+```
+.env.example
+```
+
+---
+
+# ▶️ Run Application
+
+Start FastAPI:
+
+```bash
+uvicorn app.api.main:app --reload
+```
+
+Application runs at:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+# 📘 API Documentation
+
+Swagger UI:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+Example API response:
+
+![Swagger Response](assets/swagger_response.png)
+
+---
+
+# 🧪 Testing
+
+Run tests:
 
 ```bash
 python tests/test_agent_tools.py
 ```
 
+Example tests:
+
+```
+TEST 1 - Loan Eligibility Check
+
+TEST 2 - EMI Calculation
+
+TEST 3 - Combined Eligibility + EMI Agent
+```
+
 ---
 
-# Future Improvements
+# 💡 Sample Queries
+
+## Eligibility Query
+
+```
+Can I get a 20 year home loan?
+My age is 60
+```
+
+Response:
+
+```
+Decision:
+Not Eligible
+
+Reason:
+Maturity age is 80 years,
+which exceeds maximum allowed age of 75 years.
+```
+
+---
+
+## EMI Query
+
+```
+Calculate EMI.
+
+Loan amount:
+500000
+
+Interest rate:
+6%
+
+Tenure:
+20 years
+```
+
+Response:
+
+```
+Monthly EMI:
+3582.16
+```
+
+---
+
+# 🎯 Engineering Concepts Demonstrated
+
+This project demonstrates:
+
+✅ Retrieval Augmented Generation (RAG)
+
+✅ Vector similarity search
+
+✅ Embeddings
+
+✅ LLM integration
+
+✅ LangGraph agent workflows
+
+✅ Tool calling
+
+✅ Prompt engineering
+
+✅ FastAPI backend development
+
+✅ AI application architecture
+
+✅ Memory persistence
+
+---
+
+# 🔮 Future Improvements
 
 Possible production enhancements:
 
-* Add authentication layer
-* Deploy using Docker
-* Add cloud LLM support
-* Add monitoring and logging
-* Add customer profile database integration
-* Add evaluation framework for RAG accuracy
+* Authentication and authorization
+* Cloud deployment
+* Docker containerization
+* CI/CD pipeline
+* Logging and monitoring
+* Evaluation framework
+* Multi-document knowledge base
+* Better conversation memory
+* Enterprise vector database integration
 
 ---
 
-# Skills Demonstrated
+# 👨‍💻 Author
 
-* Generative AI
-* LLM Application Development
-* RAG Systems
-* LangGraph Agents
-* LangChain Tool Calling
-* FastAPI Development
-* Vector Databases
-* AI Backend Engineering
+**Nithin SP**
+
+AI Engineer | Generative AI | RAG | LangGraph | LLM Applications
+
+GitHub:
+
+[https://github.com/nithinsp7-oss](https://github.com/nithinsp7-oss)
+
+---
+
+# 📄 Interview Documentation
+
+Detailed project explanation:
 
 ```
+docs/interview_notes.md
+```
+
+Contains:
+
+* Architecture explanation
+* RAG design decisions
+* LangGraph workflow
+* Tool implementation
+* Interview discussion points
+
+````
+
+---
+
+After replacing README:
+
+Run:
+
+```powershell
+git add README.md
+git commit -m "Improve project README documentation"
+git push
+````
+
+This README will make the repository look like a **real AI Engineer portfolio project**, not just a coding exercise.
+ 
