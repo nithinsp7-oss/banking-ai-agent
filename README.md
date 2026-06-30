@@ -1,51 +1,32 @@
-# Banking AI Agent - Mortgage Assistant using RAG and LangGraph
+# Banking AI Agent - Home Loan Assistant
 
-An Agentic AI-powered mortgage assistant that helps answer Australian home loan policy queries using Retrieval-Augmented Generation (RAG), LangGraph workflows, FAISS vector search, and custom financial tools.
+An AI-powered mortgage banking assistant built using Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), LangGraph agents, and FastAPI.
 
-The system combines Large Language Models (LLMs) with banking domain knowledge to provide accurate loan eligibility decisions and EMI calculations.
+The system helps customers evaluate home loan eligibility based on lending policies and calculate estimated EMI using AI-powered tool calling.
 
 ---
 
 # Project Overview
 
-Traditional banking support systems require manual policy lookup and rule checking.
+Traditional banking assistants rely on predefined rules and limited responses.
 
-This project demonstrates an AI assistant capable of:
+This project demonstrates a modern AI banking assistant capable of:
 
-- Understanding customer mortgage questions
-- Retrieving relevant banking policy information
-- Applying eligibility rules
-- Calculating loan EMI
-- Producing structured responses
+- Understanding natural language customer queries
+- Retrieving relevant lending policy information using RAG
+- Performing eligibility assessment
+- Calculating EMI dynamically
+- Using LLM agent reasoning with external tools
 
-The assistant is designed around an agentic workflow where the LLM can reason and invoke domain-specific tools.
 
 ---
 
 # Architecture
-                     User
-                      |
-                      |
-                FastAPI API
-                      |
-                      |
-              LangGraph Agent
-                      |
-    ---------------------------------
-    |                               |
-    |                               |
-RAG Pipeline                  Tool Calling
-    |                               |
-    |                    -----------------------
-    |                    |                     |
- FAISS Vector Store EMI Calculator Eligibility Tool
-|
-|
-Australian Mortgage Policy Documents
-                                    |
-                      |
-                Mistral LLM
-                 (Ollama)
+
+The system follows an agent-based AI architecture:
+
+
+![Architecture](assets/architecture.png)
 
 
 ---
@@ -54,85 +35,100 @@ Australian Mortgage Policy Documents
 
 ## Artificial Intelligence
 
-- Large Language Models (LLMs)
-- Mistral using Ollama
-- Retrieval-Augmented Generation (RAG)
-- Vector Embeddings
-- Semantic Search
-
-## Agent Framework
-
+- Large Language Model: Mistral (Ollama)
 - LangChain
 - LangGraph
-- Tool Calling
-- Agent Workflow Orchestration
+- Retrieval-Augmented Generation (RAG)
+- Vector Embeddings
+- FAISS Vector Database
+
 
 ## Backend
 
-- FastAPI
 - Python
+- FastAPI
 - Pydantic
 
-## Vector Database
-
-- FAISS
 
 ## Storage
 
-- SQLite
-- LangGraph Memory Checkpointing
+- FAISS Vector Store
+- SQLite Memory Checkpoint
 
----
 
-# Key Features
+## Development
 
-## 1. Retrieval-Augmented Generation (RAG)
-
-The system retrieves relevant mortgage policy information from documents before generating responses.
-
-Flow:
-    Question
-|
-Embedding Model
-|
-FAISS Similarity Search
-|
-Relevant Policy Context
-|
-LLM Response Generation
+- Git
+- GitHub
+- Virtual Environment
 
 
 ---
 
-## 2. Loan Eligibility Tool
+# AI Workflow
 
-The agent validates:
+Customer Query
 
-- Customer age
-- Requested loan tenure
-- Maximum maturity age rule
+↓
+
+LangGraph Agent
+
+↓
+
+Intent Understanding
+
+↓
+
+Tool Selection
+
+↓
+
+RAG Policy Retrieval
+
+↓
+
+Decision Generation
+
+↓
+
+Final Response
+
+
+---
+
+# Features
+
+## 1. Home Loan Eligibility Assessment
 
 Example:
-Customer Age: 60
-Loan Tenure: 20 years
 
-Maturity Age:
-60 + 20 = 80
+Customer:
 
-Maximum Allowed:
-75
+"I am 55 years old. Can I get a 15 year home loan?"
 
-Decision:
-Not Eligible
+System calculates:
+
+Customer Age + Loan Tenure = Maturity Age
+
+55 + 15 = 70 years
+
+
+Maximum allowed maturity age:
+
+75 years
+
+
+Result:
+
+Eligible
 
 
 ---
 
-## 3. EMI Calculator Tool
-
-The assistant can calculate monthly EMI.
+## 2. EMI Calculation
 
 Example:
+
 Loan Amount:
 500000
 
@@ -140,217 +136,167 @@ Interest Rate:
 6%
 
 Tenure:
-20 years
+15 years
 
-Monthly EMI:
-3582.16
+
+Generated EMI:
+
+4219.28/month
 
 
 ---
 
-# LangGraph Agent Workflow
-START
+## 3. Combined AI Agent Capability
 
-|
-|
-Agent Node
-|
-|
-Tool Execution
-|
-|
-Response Processing
-|
-|
-END
+The agent can perform multiple tasks:
 
+- Check eligibility
+- Calculate EMI
+- Provide policy references
+- Generate structured banking responses
 
-The workflow allows:
-
-- LLM reasoning
-- Tool selection
-- Structured output generation
-- Stateful conversations
 
 ---
 
-# API Example
+# Project Structure
 
-## Request
+```
 
-```json
-{
- "question":"I am 55 years old. Can I get a 15 year home loan?",
- "customer_age":55,
- "loan_tenure":15
-}
+banking-ai-agent
 
-Response
-{
- "decision":"Eligible",
- "reason":"Customer age plus tenure equals maturity age 70 years, which is within the allowed limit.",
- "policy_reference":[
-    "Customer Age Eligibility",
-    "Maximum Loan Tenure"
- ],
- "emi":4219.28
-}
-
-banking-ai-agent/
-
-├── app/
-│   ├── agents/
-│   │   └── rag_agent.py
-│   |
-│   ├── api/
-│   │   └── routes.py
-│   |
-│   ├── rag/
-│   │   ├── retriever.py
-│   │   ├── loader.py
-│   │   └── vector_store.py
-│   |
-│   ├── tools/
-│       ├── eligibility_tool.py
-│       └── emi_tool.py
-|
-├── documents/
+├── app
+│
+├── agents
+│   └── rag_agent.py
+│
+├── api
+│   ├── main.py
+│   └── routes.py
+│
+├── rag
+│   ├── loader.py
+│   ├── retriever.py
+│   └── vector_store.py
+│
+├── tools
+│   ├── eligibility_tool.py
+│   └── emi_tool.py
+│
+├── documents
 │   └── home_loan_policy.md
-|
-├── tests/
-|
+│
+├── tests
+│
+├── assets
+│   ├── architecture.png
+│   └── swagger_response.png
+│
 ├── requirements.txt
 └── main.py
 
-Running the Application
-
-Install dependencies:
-Bash
-pip install -r requirements.txt
-
-Start Ollama:
-Bash
-ollama run mistral
-
-Run API:
-Bash
-uvicorn main:app --reload
-
-Swagger documentation:
-
-http://localhost:8000/docs
-
-Future Improvements
-Docker containerization
-Cloud deployment
-CI/CD pipeline
-Authentication layer
-Production vector database
-Automated evaluation framework
-Monitoring and logging
-
-Skills Demonstrated
-Python
-FastAPI
-LangChain
-LangGraph
-Generative AI
-RAG Systems
-Vector Databases
-LLM Tool Calling
-AI Agents
-API Development
-Banking Domain Automation
-
-## System Architecture
-
-![Banking AI Agent Architecture](assets/architecture.png)
-
-User
- |
- v
-FastAPI
- |
- v
-LangGraph Agent
- |
- +----------------+
- |                |
- v                v
-RAG Retriever     Tools
- |                |
- v                |
-FAISS Vector DB   |
-                  |
-        +---------+
-        |
-        v
-     LLM (Mistral)
-        |
-        v
-Response
+````
 
 
+---
 
-## API Testing Result (Swagger)
+# API Demo
+
+FastAPI Swagger Interface:
 
 ![Swagger Response](assets/swagger_response.png)
 
-POST /chat
 
-Request:
+Example Request:
+
+```json
 {
- "question": "I am 60 years old. Can I get 20 year loan?"
+ "question":
+ "I am 55 years old. Can I get a 15 year home loan? Loan amount 500000 interest rate 6%"
 }
+````
 
-Response:
+Example Response:
+
+```json
 {
- "decision": "Not Eligible",
- "reason": "...",
+ "decision": "Eligible",
+ "reason": "Customer maturity age is 70 years which is within the allowed limit",
  "policy_reference": [
-    "Customer Age Eligibility",
-    "Maximum Loan Tenure"
+   "Customer Age Eligibility",
+   "Maximum Loan Tenure"
  ],
- "emi": null
+ "emi":4219.28
 }
+```
 
-# Banking AI Agent
+---
 
-## Overview
-## Problem Statement
-## Architecture
-## Technology Stack
-## RAG Pipeline Flow
-## Agent Workflow
-## Features
-## Project Structure
-## Installation
-## Running the Application
-## API Examples
-## Sample Responses
-## Future Improvements
+# Installation
 
-API example
+Clone repository:
 
-POST /chat
+```bash
+git clone https://github.com/nithinsp7-oss/banking-ai-agent.git
+```
 
-{
-  "question": "I am 55 years old. Can I get a 15 year home loan? Loan amount 500000, interest rate 6%"
-}
+Create environment:
 
-{
-  "decision": "Eligible",
-  "reason": "Customer maturity age is 70 years...",
-  "policy_reference": [
-    "Customer Age Eligibility",
-    "Maximum Loan Tenure"
-  ],
-  "emi": 4219.28
-}
+```bash
+python -m venv venv
+```
 
+Activate:
 
+Windows:
 
+```bash
+venv\Scripts\activate
+```
 
+Install dependencies:
 
+```bash
+pip install -r requirements.txt
+```
 
+Run application:
 
+```bash
+python main.py
+```
+
+---
+
+# Running Tests
+
+```bash
+python tests/test_agent_tools.py
+```
+
+---
+
+# Future Improvements
+
+Possible production enhancements:
+
+* Add authentication layer
+* Deploy using Docker
+* Add cloud LLM support
+* Add monitoring and logging
+* Add customer profile database integration
+* Add evaluation framework for RAG accuracy
+
+---
+
+# Skills Demonstrated
+
+* Generative AI
+* LLM Application Development
+* RAG Systems
+* LangGraph Agents
+* LangChain Tool Calling
+* FastAPI Development
+* Vector Databases
+* AI Backend Engineering
+
+```
