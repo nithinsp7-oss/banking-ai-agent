@@ -262,4 +262,60 @@ AI Agents
 API Development
 Banking Domain Automation
 
+## System Architecture
+
+![Banking AI Agent Architecture](assets/architecture.png)
+
+User
+ |
+ v
+FastAPI
+ |
+ v
+LangGraph Agent
+ |
+ +----------------+
+ |                |
+ v                v
+RAG Retriever     Tools
+ |                |
+ v                |
+FAISS Vector DB   |
+                  |
+        +---------+
+        |
+        v
+     LLM (Mistral)
+        |
+        v
+Response
+
+
+
+## API Testing Result (Swagger)
+
+![Swagger Response](assets/swagger_response.png)
+
+POST /chat
+
+Request:
+{
+ "question": "I am 60 years old. Can I get 20 year loan?"
+}
+
+Response:
+{
+ "decision": "Not Eligible",
+ "reason": "...",
+ "policy_reference": [
+    "Customer Age Eligibility",
+    "Maximum Loan Tenure"
+ ],
+ "emi": null
+}
+
+
+
+
+
 
