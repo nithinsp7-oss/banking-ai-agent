@@ -314,6 +314,41 @@ Response:
  "emi": null
 }
 
+# Banking AI Agent
+
+## Overview
+## Problem Statement
+## Architecture
+## Technology Stack
+## RAG Pipeline Flow
+## Agent Workflow
+## Features
+## Project Structure
+## Installation
+## Running the Application
+## API Examples
+## Sample Responses
+## Future Improvements
+
+API example
+
+POST /chat
+
+{
+  "question": "I am 55 years old. Can I get a 15 year home loan? Loan amount 500000, interest rate 6%"
+}
+
+{
+  "decision": "Eligible",
+  "reason": "Customer maturity age is 70 years...",
+  "policy_reference": [
+    "Customer Age Eligibility",
+    "Maximum Loan Tenure"
+  ],
+  "emi": 4219.28
+}
+
+
 
 
 
